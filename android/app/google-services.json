@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "94172739971",
+    "project_id": "whereismybus-372b8",
+    "storage_bucket": "whereismybus-372b8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:94172739971:android:c37a61b5ce28df9d111eb6",
+        "android_client_info": {
+          "package_name": "com.example.where_is_my_bus"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOFJSyFYxm9alA0A4nSYsvmfzyYiFZPEc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
