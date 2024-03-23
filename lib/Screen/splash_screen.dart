@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:where_is_my_bus/Screen/home_screen.dart';
 import 'package:where_is_my_bus/Screen/login_screen.dart';
@@ -16,7 +17,16 @@ class _SplashScreenState extends State<SplashScreen> {
     loginCheck(context);
     return Scaffold(
       body: Center(
-        child: Text("this is splash"),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset('Assets/images/Splash_icon.png',
+            height: 500,),
+            SizedBox(height: 100,),
+            LoadingAnimationWidget.twistingDots(leftDotColor: Color.fromARGB(255, 3, 101, 143), rightDotColor: Color.fromARGB(255, 3, 158, 106), size: 40),
+            //LoadingAnimationWidget.fourRotatingDots(color:Color.fromARGB(255, 3, 101, 143) , size: 30)
+          ],
+        ),
       ),
     );
   }

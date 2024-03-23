@@ -18,20 +18,39 @@ class _ResultPageState extends State<ResultPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 3, 101, 143),
+        foregroundColor: Colors.white,
         title: Row(
           children: [
-            Text(widget.From),
+            Text(widget.From,
+            style: TextStyle(
+              fontWeight: FontWeight.bold
+            ),),
             Icon(Icons.arrow_forward),
-            Text(widget.To),
+            Text(widget.To,
+            style: TextStyle(
+              fontWeight: FontWeight.bold
+            ),),
           ],
         ),
       ),
-      body:Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: ListView.separated(
-          itemCount: widget.buses.length,
-          itemBuilder: ((context, index) =>BusCard(context,widget.buses[index]) ),
-          separatorBuilder: (ctx,index)=>SizedBox(height: 30,)),
+      body:Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            colors: [
+              Color.fromARGB(255, 3, 101, 143),
+              Color.fromARGB(255, 3, 158, 106)
+            ],
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: ListView.separated(
+            itemCount: widget.buses.length,
+            itemBuilder: ((context, index) =>BusCard(context,widget.buses[index],index) ),
+            separatorBuilder: (ctx,index)=>SizedBox(height: 20,)),
+        ),
       ) ,
     );
   }

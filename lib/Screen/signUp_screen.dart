@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:where_is_my_bus/Screen/login_screen.dart';
 import 'package:where_is_my_bus/firebase/function.dart';
 
-
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
 
@@ -14,20 +13,25 @@ class SignUpPage extends StatefulWidget {
 
 class _SignUpPageState extends State<SignUpPage> {
   bool _obscureText = true;
-  TextEditingController _email =TextEditingController();
-  TextEditingController _name =TextEditingController();
-  TextEditingController _pass =TextEditingController();
+  TextEditingController _email = TextEditingController();
+  TextEditingController _name = TextEditingController();
+  TextEditingController _pass = TextEditingController();
   @override
   Widget build(BuildContext context) {
-  bool _isKeyboard=MediaQuery.of(context).viewInsets.bottom>0;
+    bool _isKeyboard = MediaQuery.of(context).viewInsets.bottom > 0;
     return Scaffold(
       body: Container(
         padding: EdgeInsets.symmetric(vertical: 30),
         width: double.infinity,
         decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                colors: [Colors.orange, Colors.yellow])),
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            colors: [
+              Color.fromARGB(255, 3, 101, 143),
+              Color.fromARGB(255, 3, 158, 106)
+            ],
+          ),
+        ),
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
@@ -39,10 +43,27 @@ class _SignUpPageState extends State<SignUpPage> {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      !_isKeyboard? Text("Create an account",
-                          style: TextStyle(color: Colors.white, fontSize: 40)):SizedBox(),
+                      !_isKeyboard
+                          ? Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Create",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 50,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                                Text(
+                                  "Account",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 20),
+                                )
+                              ],
+                            )
+                          : SizedBox(),
                       SizedBox(
-                        height: !_isKeyboard? 10:0,
+                        height: !_isKeyboard ? 10 : 0,
                       ),
                     ]),
               ),
@@ -53,7 +74,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       borderRadius: BorderRadius.all(Radius.circular(20.0))),
                   child: Padding(
                     padding: EdgeInsets.all(25),
-                    child: ListView(children:[
+                    child: ListView(children: [
                       SizedBox(
                         height: 10,
                       ),
@@ -111,34 +132,40 @@ class _SignUpPageState extends State<SignUpPage> {
                         height: 40,
                       ),
                       SizedBox(height: 20),
-                      MaterialButton(onPressed: () async{
-                        var res= await userRegEmail(_email.text, _pass.text);
-                            if (res) {
-                              Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (ctx)=>LoginPage()), (route) => false);
-                            }
-                            else{
-                              print("sign up failed");
-                            }
-                           ;
-                      },
-                      color: Colors.orange,
-                      height: 30,
-                      minWidth: 50,
-                      child: Text("Sign Up"),),
+                      MaterialButton(
+                        onPressed: () async {
+                          var res = await userRegEmail(_email.text, _pass.text);
+                          if (res) {
+                            Navigator.of(context).pushAndRemoveUntil(
+                                MaterialPageRoute(
+                                    builder: (ctx) => LoginPage()),
+                                (route) => false);
+                          } else {
+                            print("sign up failed");
+                          }
+                          ;
+                        },
+                        height: 50,
+                        minWidth: 400,
+                        color: Color.fromARGB(255, 3, 101, 143),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Text(
+                          "Sign Up",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w400),
+                        ),
+                      ),
                       SizedBox(height: 50),
-                      Row(
-                        children: [
-                          Text("Already have an account ?"),
-                          TextButton(onPressed: ()async {
-                          }, child: Text("Login"))
-                        ],
-                      )
                     ]),
                   ),
                 ),
               ),
             ]),
-    ),
-);
-}
+      ),
+    );
+  }
 }
