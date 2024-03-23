@@ -1,7 +1,9 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:where_is_my_bus/Constants/Controllers.dart';
+import 'package:where_is_my_bus/Screen/login_screen.dart';
 import 'package:where_is_my_bus/Widgets/SearchFiled.dart';
 import 'package:where_is_my_bus/firebase/function.dart';
 
@@ -20,13 +22,44 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 3, 101, 143),
+        title: Row(
+          children: [
+            Image.asset('Assets/images/Logo_white.png',
+            height: 30,),
+            SizedBox(
+              width: 5,
+            ),
+            Text('EazBus',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 30,
+              fontWeight: FontWeight.w900
+            ),),
+          ],
+        ),
+        actions: [
+          IconButton(
+            onPressed: () async {
+              SharedPreferences pref = await SharedPreferences.getInstance();
+              await pref.setBool('isloggedIn', false);
+              Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (ctx) => LoginPage()),
+                  (route) => false);
+            },
+            icon: Icon(Icons.logout_outlined,
+            color: Colors.white,),
+          ),
+        ],
+      ),
       body: SafeArea(
         child: Container(
           width: double.infinity,
           height: double.infinity,
           decoration: BoxDecoration(
             gradient: LinearGradient(
-                colors: [Colors.orange, Colors.yellow],
+                colors: [Color.fromARGB(255, 3, 101, 143), Color.fromARGB(255, 3, 158, 106)],
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter),
           ),
@@ -92,7 +125,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   },
                                   icon: Icon(Icons.swap_vert_circle),
                                   iconSize: 40,
-                                  color: Colors.orange,
+                                  color: Color.fromARGB(255, 3, 101, 143),
                                   hoverColor: Colors.black,
                                 )
                               ],
@@ -103,22 +136,23 @@ class _MyHomePageState extends State<MyHomePage> {
                             SizedBox(
                               height: 40,
                             ),
-                            ElevatedButton(
+                            MaterialButton(
                               onPressed: () {
                                 searchBus(context);
                               },
-                              style: ButtonStyle(
-                                textStyle: MaterialStateProperty.all(TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                )),
-                                minimumSize:
-                                    MaterialStatePropertyAll(Size(350, 50)),
-                                backgroundColor:
-                                    MaterialStateProperty.all(Colors.orange),
+                              height: 50,
+                              minWidth: 400,
+                              color: Color.fromARGB(255, 3, 101, 143),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
                               ),
-                              child: Text('Find Bus'),
+                              child: Text(
+                                "Find Bus",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w400),
+                              ),
                             ),
                           ],
                         ),
