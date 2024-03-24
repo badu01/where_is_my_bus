@@ -8,33 +8,9 @@ import 'package:where_is_my_bus/Constants/Constants.dart';
 import 'package:where_is_my_bus/Constants/Controllers.dart';
 import 'package:where_is_my_bus/Screen/home_screen.dart';
 import 'package:where_is_my_bus/Screen/result_screen.dart';
+import 'package:where_is_my_bus/Screen/route_screen.dart';
 
 var db = FirebaseFirestore.instance;
-
-List users=[];
-
-var bus = <String, dynamic>{
-  "name": "Glada",
-  "From": "Kothamangalam",
-  "To": "Aluva",
-  "Curr_location":'Ponjassery',
-  "seat_vecancy":true,
-  "bus_no":"KL 40 j 5852"
-};
-
-addUser() async{
-  db.collection("users").add(bus).then((DocumentReference doc) =>
-    print('DocumentSnapshot added with ID: ${doc.id}'));
-}
-
-getUser() async {
-  await db.collection("users").get().then((event) {
-  for (var doc in event.docs) {
-    // users.add(doc.data().toString());
-    print("${doc.id} => ${doc["name"]}");
-  }
-});
-}
 
 void searchBus(BuildContext context) async {
 
@@ -119,4 +95,14 @@ signIn(email, pass, context) async {
       print('Wrong password provided for that user.');
     }
   }
+}
+
+
+busNameSearch(context)async{
+db.collection('buses').where('name',isEqualTo: BusController.text).get().then((value){
+  var busDoc=value.docs;
+  Busdetails = busDoc[0].data();
+ // print(Busdetails['name']);
+  Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=>BusRoute(bus: Busdetails)));
+});
 }

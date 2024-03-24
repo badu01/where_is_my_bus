@@ -1,6 +1,6 @@
 //
 
-// ignore_for_file: sized_box_for_whitespace, prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: sized_box_for_whitespace, prefer_const_constructors, prefer_const_literals_to_create_immutables, must_be_immutable
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -30,46 +30,48 @@ class _BusRouteState extends State<BusRoute> {
         ],
       ),
       body: SafeArea(
-          child: Column(
-        children: [
-          Container(
-            child: ListView.builder(
-                controller: ScrollController(keepScrollOffset: true),
-                shrinkWrap: true,
-                itemCount: widget.bus['stops'].length,
-                itemBuilder: (ctx, index) =>
-                    routeCard(widget.bus, context, index)),
-          ),
-          Container(
-            width: double.infinity,
-            color: Color.fromARGB(255, 3, 101, 143),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Bus Details',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text('Name: ${widget.bus["name"]}',
-                  style: TextStyle(
-                    color: Colors.white
-                  ),),
-                  Text('Name: ${widget.bus["number"]}',
-                  style: TextStyle(
-                    color: Colors.white
-                  ),),
-                ],
-              ),
+          child: SingleChildScrollView(
+            child: Column(
+                    children: [
+            Container(
+              child: ListView.builder(
+                  controller: ScrollController(keepScrollOffset: true),
+                  shrinkWrap: true,
+                  itemCount: widget.bus['stops'].length,
+                  itemBuilder: (ctx, index) =>
+                      routeCard(widget.bus, context, index)),
             ),
-          )
-        ],
-      )),
+            Container(
+              width: double.infinity,
+              color: Color.fromARGB(255, 3, 101, 143),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Bus Details',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text('Name: ${widget.bus["name"]}',
+                    style: TextStyle(
+                      color: Colors.white
+                    ),),
+                    Text('Name: ${widget.bus["number"]}',
+                    style: TextStyle(
+                      color: Colors.white
+                    ),),
+                  ],
+                ),
+              ),
+            )
+                    ],
+                  ),
+          )),
     );
   }
 }
@@ -118,7 +120,7 @@ Widget routeCard(bus, context, index) {
                       fontSize: 18, color: x ? Colors.white : Colors.black),
                 ),
                 Text(
-                  '${10.00 + index * 5.2}0 AM',
+                  '${10 + index * .2}0 AM'.trimRight(),
                   style: TextStyle(color: x ? Colors.white : Colors.black),
                 )
               ],

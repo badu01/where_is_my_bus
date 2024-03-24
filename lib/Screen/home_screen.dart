@@ -165,7 +165,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 Container(
                   width: MediaQuery.of(context).size.width * 0.9,
-                  height: 125.0,
+                 // height: 125.0,
                   decoration: BoxDecoration(
                     boxShadow: const [
                       BoxShadow(
@@ -179,39 +179,20 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(12.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Search Bus',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Search Bus',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ),
-                        TextField(
-                          controller: t1,
-                          decoration: InputDecoration(
-                              hintText: 'Bus Name',
-                              border: OutlineInputBorder(),
-                              suffixIcon: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  IconButton(
-                                      onPressed: () {
-                                        t1.text = '';
-                                        setState(() {
-                                          t1;
-                                        });
-                                      },
-                                      icon: Icon(Icons.close)),
-                                  IconButton(
-                                      onPressed: () {},
-                                      icon: Icon(Icons.search)),
-                                ],
-                              )),
-                        ),
-                      ],
+                          BusSerachField(controller: BusController, hint: 'Search Bus'),
+                        ],
+                      ),
                     ),
                   ),
                 ),
