@@ -141,7 +141,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                     builder: (ctx) => LoginPage()),
                                 (route) => false);
                           } else {
-                            print("sign up failed");
+                            //print("Sign up failed");
                           }
                           ;
                         },
